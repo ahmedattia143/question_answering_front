@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-md-3">
+    <a [routerLink]="['/']" routerLinkActive="active"><button class="btn"><i class="fa fa-arrow-left"></i> Home</button></a>
+  </div>
+  <p></p>>
+  <p></p>
+  <p></p>
+</div>
+<div class="row">
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6">
+    <!-- <div class="button-upload">Upload Context</div> -->
+    <form #formulaire="ngForm" (ngSubmit)="onSubmit(formulaire)">
+    <div class="ball">
+      <label for="contextFile" class="button-upload">Upload Context File</label>
+    <input
+    type="file"
+    class="form-control-file"
+    id="contextFile"
+    name="contextfile"
+    ngModel
+    #fileInput="ngModel"
+    (change)="onFileChange($event)"
+    style="display: none"
+    accept=".txt"
+  />
+    </div>
+    <p></p>
+    <div class="ball">
+      <label for="context" class="label-text">Context:</label>
+
+      <textarea
+      id="context"
+       name="context"
+        rows="10"
+         cols="80"
+         class="form-control context"
+        [(ngModel)]="context"
+        required
+        #contextField="ngModel"
+
+         >
+      {{context}}
+      </textarea>
+    </div>
+    <p></p>
+    <div class="form-group has-search ball">
+      <label for="question" class="label-text">Question</label>
+      <span class="fa fa-search form-control-feedback"></span>
+      <input type="text" class="form-control" placeholder="Enter your question here"
+       name="question" required ngModel  [(ngModel)]="question"
+       (ngModelChange)="questionChange($event)"
+       >
+    </div>
+
+    <button class="getresp-button ball" [disabled]="formulaire.invalid">Get Response</button>
+
+  </form>
+  </div>
+  <div class="col-md-3"></div>
+
+
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+
+      <div *ngIf="response && question && context" >
+        <div>
+          <p></p>
+          <h3 class="label-text">Response</h3>
+        </div>
+        <div class="answer">
+          {{response}}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+
+</div>
+
+
