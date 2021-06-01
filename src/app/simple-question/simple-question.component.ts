@@ -21,8 +21,9 @@ export class SimpleQuestionComponent implements OnInit {
   onSubmit(form: NgForm):void{
       this.simpleQuestionService.getResponse(form.value.question).subscribe(
         (response) => {
-          this.response = response.title
-          console.log(this.response)
+          console.log(response)
+          this.response = response.answers[0].answer
+          
         },
         (erreur) => {
           this.error=true;

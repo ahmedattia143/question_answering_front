@@ -39,7 +39,7 @@ export class ContextQuestionComponent implements OnInit {
   onSubmit(form: NgForm):void{
       this.contextQuestionService.getResponse(form.value.question,form.value.context).subscribe(
         (response) => {
-          this.response = response.title
+          this.response = response.answer
           console.log(this.response)
         },
         (erreur) => {
