@@ -11,6 +11,7 @@ export class SimpleQuestionComponent implements OnInit {
   question = '' ;
   response = null;
   error:boolean = false;
+  loading:boolean = false;
 
   constructor(private simpleQuestionService: SimpleQuestionService) { }
   ngOnInit(): void {
@@ -19,14 +20,17 @@ export class SimpleQuestionComponent implements OnInit {
     this.response=null
   }
   onSubmit(form: NgForm):void{
+    this.loading = true
       this.simpleQuestionService.getResponse(form.value.question).subscribe(
         (response) => {
-          console.log(response)
-          this.response = response.answers[0].answer
-          
+          console.log(response);
+          this.response = response.answers[0].answer;
+          this.loading = false;
+
         },
         (erreur) => {
           this.error=true;
+          this.loading = false;
         }
       );
   }

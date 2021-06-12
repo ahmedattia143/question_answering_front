@@ -14,6 +14,7 @@ export class ContextQuestionComponent implements OnInit {
   question:string = '';
   response = null;
   error:boolean =false;
+  loading:boolean = false;
   private file: any;
   ngOnInit(): void {
   }
@@ -37,13 +38,17 @@ export class ContextQuestionComponent implements OnInit {
     this.response=null
   }
   onSubmit(form: NgForm):void{
+    this.loading = true
       this.contextQuestionService.getResponse(form.value.question,form.value.context).subscribe(
         (response) => {
           this.response = response.answer
+          this.loading = false;
           console.log(this.response)
         },
         (erreur) => {
+          this.loading = false;
           this.error=true;
+
         }
       );
   }
